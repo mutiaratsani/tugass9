@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, send_from_directory
-from tensorflow.keras.models import load_model
+# from tensorflow.keras.models import load_model
+import keras
 import numpy as np
 import os
 import cv2
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = './static/uploads/'
-model = load_model('elephant_lion_class_model.h5')
+app = Flask(_name_)
+app.config['UPLOAD_FOLDER'] = 'static/uploads/'
+model = keras.models.load_model('elephant_lion_class_model.h5')
 
 class_dict = {0: 'Burung Bangau', 1: 'Burung Merpati'}
 
@@ -18,7 +19,12 @@ def predict_label(img_path):
     q.append(query)
     q = np.array(q, dtype='float') / 255.0
     q_pred = model.predict(q)
-    predicted_bit = int(q_pred)
+    predicted_bit = q_pred * 10
+    if(predicted_bit < 1):
+        predicted_bit = 0
+    if(predicted_bit>=1):
+        predicted_bit = 1
+    print(predicted_bit)
     return class_dict[predicted_bit]
 
 @app.route('/', methods=['GET', 'POST'])
@@ -37,5 +43,5 @@ def index():
 def send_uploaded_image(filename=''):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)
