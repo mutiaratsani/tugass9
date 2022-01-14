@@ -43,5 +43,5 @@ def index():
 def send_uploaded_image(filename=''):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
