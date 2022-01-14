@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, send_from_directory
 import keras
 import numpy as np
 import os
-import cv
+import cv2
 
 app = Flask(_name_)
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
