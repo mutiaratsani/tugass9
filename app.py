@@ -5,7 +5,7 @@ import numpy as np
 import os
 import cv2
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 model = keras.models.load_model('elephant_lion_class_model.h5')
 
